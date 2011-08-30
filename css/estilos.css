@@ -106,6 +106,7 @@ table tr th, table .indicadores{
 	font-family: Arial,Verdana;
     font-size: 13px;
     padding-right: 15px;
+	text-align: left;
 }
 table tr .max{
 	padding-right: 75px !important;
