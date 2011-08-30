@@ -53,7 +53,7 @@ jQuery(document).ready(function() {
     });
     
     jQuery('.aplicar').click(function(){
-    	alert('teste');
+
     });
     
     jQuery('#gravar').click(function(){
