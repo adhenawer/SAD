@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+    	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title>
+        	Indicador de meta
+        </title>
+        <link href="css/estilos.css" type="text/css" rel="stylesheet"/>
+        <link href="js/jquery-ui/css/ui-lightness/jquery-ui-1.8.16.custom.css" type="text/css" rel="stylesheet"/>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	    <script type="text/javascript">
+	      google.load('visualization', '1', {packages: ['gauge']});
+	    </script>
+	    <script type="text/javascript" src="js/gaugeInteraction.js"></script>
+        <script type="text/javascript" src="js/jquery-ui/js/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="js/alphaNumeric.js"></script>
+        <script type="text/javascript" src="js/eventos.js"></script>
+	    <script type="text/javascript" src="js/datepickerPt-br.js"></script>
+    </head>
+    <body>
+	    <div id="nav">
+	         <form id = "formIndicador">
+	            <h3>Indicador de Qualidade</h3>
+	            
+	            <div class="field">
+	                <label for="periodo">Período:</label>
+	                <input type="text" class="input" name="periodo1" id="periodo1" /> -
+	                <input type="text" class="input" name="periodo2" id="periodo2" />
+	                <!--<p class="hint">Insira o período</p>-->
+	            </div>
+	            
+	            <div class="field">
+	                <label for="nome">Nome:</label>
+	                <input type="text" class="input" name="nome" id="nome" />
+	            </div>
+	
+	            <div class="field">
+	                <label for="meta">Meta:</label>
+	                <input type="text" class="input" name="meta" id="meta" />
+	            </div>
+	
+	            <div class="field">
+	                <label for="tolerancia">Tolerância(%):</label>
+	                <input type="text" class="input" name="tolerancia" id="tolerancia" />
+	            </div>
+	
+	            <div class="field">
+	                <label for="aviso">Aviso(%):</label>
+	                <input type="text" class="input" name="aviso" id="aviso" />
+	            </div>
+	            
+	            <div class="field">
+	                <label for="realizacao">Realização:</label>
+	                <input type="text" class="input" name="realizado" id="realizado" />
+	            </div>
+	
+	            <input type= "button" name= "gravar" id= "gravar" value="Gravar" class="button"/>
+	            <input type= "button" name= "limpar" id= "limpar" value="Limpar" class="button"/>
+	        </form>
+	        <div id="gauge"></div>
+	        <table id="grid">
+	        	<tr id="legend">
+		        	<th class="max">De</th>
+		        	<th class="max">Até</th>
+		        	<th class="name">Nome</th>
+		        	<th>Meta</th>
+		        	<th>Tolerância</th>
+		        	<th>Aviso</th>
+		        	<th>Realização</th>
+		        	<th>Aplicar</th>
+	        	</tr>
+	        	<tbody class="indicadores"></tbody>
+			</table>
+	     </div>
+    </body>
+</html>
