@@ -42,6 +42,7 @@ jQuery(document).ready(function() {
     	jQuery('.field input').each(function(){
     		  jQuery(this).val('');
     	}); 
+
     	if(tolerance)
     		changeGauge(0, null, null, null, null, null);
     });
