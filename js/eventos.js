@@ -1,10 +1,4 @@
 jQuery(document).ready(function() {
-	realizado		= 0;
-	toleranciaMin	= 0;
-	toleranciaMax	= 0;
-	avisoMin		= 0;
-	avisoMax		= 0;
-	max				= 0;
 	jQuery('#meta').numeric();
 	jQuery('#tolerancia').numeric();
 	jQuery('#aviso').numeric();
@@ -20,47 +14,43 @@ jQuery(document).ready(function() {
     jQuery('#tolerancia').keyup(function(){
     	if(jQuery('#meta').val()){
         	tolerancia = parseInt(jQuery('#tolerancia').val());
-        	toleranciaMin = (meta - ((meta * tolerancia) / 100));
-        	toleranciaMax = (((meta * tolerancia) / 100) + meta);
-        	max = meta * 2;
-        	changeGauge(0, toleranciaMin, toleranciaMax, null, null, max);
+        	airspeedMax(meta);
+        	toleranceBand(meta, tolerancia);
+        	if(tolerancia)
+        		changeGauge(0, tolerance[0], tolerance[1], null, null, max);
     	}
     });
     
     jQuery('#aviso').keyup(function(){
     	if(jQuery('#meta').val() && jQuery('#tolerancia').val()){
-        	aviso 	   = parseInt(jQuery('#aviso').val());
-        	avisoMin = (toleranciaMin - ((meta * aviso) / 100)); 
-        	avisoMax = (((meta * aviso) / 100) + toleranciaMax);
-        	changeGauge(0, toleranciaMin, toleranciaMax, avisoMin, avisoMax, max);
+        	aviso = parseInt(jQuery('#aviso').val());
+        	warningBand(meta, aviso);
+        	if(aviso)
+        		changeGauge(0, tolerance[0], tolerance[1], warning[0], warning[1], max);
     	}
     });
     
     jQuery('#realizado').keyup(function(){
     	realizado  = parseInt(jQuery('#realizado').val());
-    	if(realizado && toleranciaMin && toleranciaMax && avisoMin && avisoMax)
-    		changeGauge(realizado, toleranciaMin, toleranciaMax, avisoMin, avisoMax, max);
+    	if(realizado && tolerance && warning)
+    		changeGauge(realizado, tolerance[0], tolerance[1], warning[0], warning[1], max);
     	// jQuery('.field input').attr("disabled", true);
     });   
     
-    jQuery('#limpar').click(function(){
+    jQuery('#limpar').click(function(){	
     	jQuery('.field input').removeAttr("disabled"); 
     	jQuery('.field input').each(function(){
     		  jQuery(this).val('');
     	}); 
-    	if(avisoMax)
-    		changeGauge(0, null, null, null, null, null)
-    });
-    
-    jQuery('.aplicar').click(function(){
-    	alert('teste');
+    	if(tolerance)
+    		changeGauge(0, null, null, null, null, null);
     });
     
     jQuery('#gravar').click(function(){
     	var dataIni = jQuery('#periodo1').val();
     	var dataFim = jQuery('#periodo2').val();
     	var nome	= jQuery('#nome').val();
-    	if(dataIni && dataFim && nome && realizado && toleranciaMin && toleranciaMax && avisoMin && avisoMax){
+    	if(realizado && tolerance && warning){
 	    	jQuery('#grid .indicadores').append( 
 	    		"<tr>" + 
 	    		"<td>"+ dataIni +"</td>"+
@@ -74,5 +64,29 @@ jQuery(document).ready(function() {
 	    		"</tr>"
 	    	);
     	}
+        jQuery('.aplicar').click(function(){
+        	var rowMeta 		= parseInt(jQuery('.tMeta').html());
+        	var rowTolerancia	= parseInt(jQuery('.tTolerancia').html());
+        	var rowAviso 		= parseInt(jQuery('.tAviso').html());
+        	var rowRealizado	= parseInt(jQuery('.tRealizado').html());
+        	console.log(jQuery('.tRealizado').parent().html());
+        	max = airspeedMax(meta);
+        	toleranceBand(meta, tolerancia);
+        	warningBand(meta, aviso);
+        	changeGauge(rowRealizado, tolerance[0], tolerance[1], warning[0], warning[1], max);
+        });
     });
 });
+function toleranceBand(meta, tolerancia){
+	tolerance		= new Array();
+	tolerance[0]	= (meta - ((meta * tolerancia) / 100));
+	tolerance[1]	= (((meta * tolerancia) / 100) + meta);
+}
+function warningBand(meta, aviso){
+	warning		= new Array();
+	warning[0]	= (tolerance[0] - ((meta * aviso) / 100)); 
+	warning[1]	= (((meta * aviso) / 100) + tolerance[1]);
+}
+function airspeedMax(meta){
+	max = meta * 2;
+}
