@@ -37,12 +37,9 @@ jQuery(document).ready(function() {
     	// jQuery('.field input').attr("disabled", true);
     });   
     
-    jQuery('#limpar').click(function(){	
+    jQuery('#limpar').click(function(){
     	//jQuery('.field input').removeAttr("disabled"); 
-    	jQuery('.field input, select').each(function(){
-    		  jQuery(this).val('');
-    	}); 
-
+		cleanInputs();
     	if(tolerance)
     		changeGauge(0, null, null, null, null, null);
     });
@@ -51,26 +48,30 @@ jQuery(document).ready(function() {
     	var dataIni = jQuery('#periodo1').val();
     	var dataFim = jQuery('#periodo2').val();
     	var nome	= jQuery('#nome').val();
-    	if(realizado && tolerance && warning){
+		var medida = jQuery('#medida optgroup option:selected').html();
+    	if(dataIni && dataFim && nome && realizado && tolerance && warning && medida){
 	    	jQuery('#grid .indicadores').append( 
 	    		"<tr>" + 
-	    		"<td>"+ dataIni +"</td>"+
-	    		"<td>"+ dataFim +"</td>"+
-	    		"<td>"+ nome +"</td>"+
-	    		"<td class='tMeta'>"+ meta +"</td>"+
-	    		"<td class='tTolerancia'>"+ tolerancia +"</td>"+
-	    		"<td class='tAviso'>"+ aviso +"</td>"+
-	    		"<td class='tRealizado'>"+ realizado +"</td>"+
-	    		"<td><span class='aplicar'>Aplicar</span></td>"+
+					"<td>"+ dataIni +"</td>"+
+					"<td>"+ dataFim +"</td>"+
+					"<td>"+ nome +"</td>"+
+					"<td>"+ medida +"</td>"+
+					"<td class='tMeta'>"+ meta +"</td>"+
+					"<td class='tTolerancia'>"+ tolerancia +"</td>"+
+					"<td class='tAviso'>"+ aviso +"</td>"+
+					"<td class='tRealizado'>"+ realizado +"</td>"+
+					"<td><span class='aplicar'>Aplicar</span></td>"+
 	    		"</tr>"
 	    	);
-    	}
+			cleanInputs();
+    	}else{
+			jQuery('#gravar').jAlert('<b>Preencha todos os campos para gravar</b>', "warning", 'warningboxid');
+		}
         jQuery('.aplicar').click(function(){
         	var rowMeta 		= parseInt(jQuery('.tMeta').html());
         	var rowTolerancia	= parseInt(jQuery('.tTolerancia').html());
         	var rowAviso 		= parseInt(jQuery('.tAviso').html());
         	var rowRealizado	= parseInt(jQuery('.tRealizado').html());
-        	console.log(jQuery('.tRealizado').parent().html());
         	max = airspeedMax(meta);
         	toleranceBand(meta, tolerancia);
         	warningBand(meta, aviso);
@@ -90,4 +91,9 @@ function warningBand(meta, aviso){
 }
 function airspeedMax(meta){
 	max = meta * 2;
+}
+function cleanInputs(){
+	jQuery('.field input, select').each(function(){
+		jQuery(this).val('');
+    }); 
 }
