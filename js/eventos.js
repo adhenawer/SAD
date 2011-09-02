@@ -38,8 +38,8 @@ jQuery(document).ready(function() {
     });   
     
     jQuery('#limpar').click(function(){	
-    	jQuery('.field input').removeAttr("disabled"); 
-    	jQuery('.field input').each(function(){
+    	//jQuery('.field input').removeAttr("disabled"); 
+    	jQuery('.field input, select').each(function(){
     		  jQuery(this).val('');
     	}); 
 
