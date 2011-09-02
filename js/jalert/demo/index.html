@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>jAlert Test Bed - By: Julian Castaneda</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.jalert.packed.js"></script>
+<link rel="stylesheet" type="text/css" href="jalert.css" />
+</head>
+<body>
+<h1> jAlert Test Bed and Examples </h1>
+
+<div id="test2" style="padding:40px; margin-top:50px;">
+jAlert with alert box placement based on container. with an onClick Event Warning
+	<div id="test3" style="width:800px; border:1px #000 solid; padding:50px; ">
+		<div id="test" style="border:1px #000 solid; text-align:center;">Click here to open a jAlert Box</div>
+	</div>
+</div>
+
+jAlert INFO with onmouseover
+<input type="button" id="btnover" value="MOUSE OVER INFO BOX" />
+<br />
+<br />
+jAlert FATAL with onmouseout
+<input type="button" id="btnout" value="MOUSE OUT FATAL BOX" />
+
+<script>
+$(document).ready(function()
+{
+	//have an alert box displayed on body load.
+	$('body').jAlert('Welcome to jAlert Demo Page', "success");
+	
+	//display jalert on an action
+	$('#test').click(function (){
+		$('#test3').jAlert('This is a jAlert Warning Box', "warning", 'warningboxid');
+	});
+
+	$('#btnover').mouseover(function (){
+		$('#btnover').jAlert('This is a jAlert Info Box', "info", 'infoboxid');
+	});
+	
+	$('#btnout').mouseout(function (){
+		$('#btnout').jAlert('This is a jAlert Fatal Box', "fatal", 'errboxid');
+	});
+});
+</script>
+</body>
+</html>
