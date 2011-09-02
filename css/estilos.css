@@ -13,7 +13,7 @@ h3{
     overflow: auto;
     padding: 20px;
     position: absolute;
-    top: 4%;
+    top: 3%;
     width: 840px;
 }
 
@@ -98,7 +98,7 @@ label {
 }
 #grid{
 	margin-left: 16%;
-	margin-top: -28px;
+	margin-top: -20px;
 }
 #legend{
 	background: none repeat scroll 0 0 #F0F0F0;
