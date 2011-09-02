@@ -1,9 +1,9 @@
 jQuery(document).ready(function() {
+	count = 0;
 	jQuery('#meta').numeric();
 	jQuery('#tolerancia').numeric();
 	jQuery('#aviso').numeric();
 	jQuery('#realizado').numeric();
-   
 	jQuery("#periodo1").datepicker();
 	jQuery("#periodo2").datepicker();
 
@@ -49,32 +49,39 @@ jQuery(document).ready(function() {
     	var dataFim = jQuery('#periodo2').val();
     	var nome	= jQuery('#nome').val();
 		var medida = jQuery('#medida optgroup option:selected').html();
-    	if(dataIni && dataFim && nome && realizado && tolerance && warning && medida){
+    	if(dataIni && dataFim && nome && realizado && tolerance && warning && medida && aviso){
 	    	jQuery('#grid .indicadores').append( 
 	    		"<tr>" + 
-					"<td>"+ dataIni +"</td>"+
-					"<td>"+ dataFim +"</td>"+
-					"<td>"+ nome +"</td>"+
-					"<td>"+ medida +"</td>"+
-					"<td class='tMeta'>"+ meta +"</td>"+
-					"<td class='tTolerancia'>"+ tolerancia +"</td>"+
-					"<td class='tAviso'>"+ aviso +"</td>"+
-					"<td class='tRealizado'>"+ realizado +"</td>"+
-					"<td><span class='aplicar'>Aplicar</span></td>"+
+					"<td class='tDataIni-"	 +count+"'>"	+ dataIni 	 +	"</td>"+
+					"<td class='tDataFim-"	 +count+"'>"	+ dataFim 	 +	"</td>"+
+					"<td class='tNome-"		 +count+"'>"	+ nome    	 +	"</td>"+
+					"<td class='tMedida-"	 +count+"'>"	+ medida 	 +	"</td>"+
+					"<td class='tMeta-"	     +count+"'>"	+ meta 		 + 	"</td>"+
+					"<td class='tTolerancia-"+count+"'>"    + tolerancia +	"</td>"+
+					"<td class='tAviso-"	 +count+"'>"	+ aviso 	 +	"</td>"+
+					"<td class='tRealizado-" +count+"'>"	+ realizado  +	"</td>"+
+					"<td><span class='aplicar' id='"+count+"'>Aplicar</span></td>"+
 	    		"</tr>"
 	    	);
+			count++;
 			cleanInputs();
     	}else{
 			jQuery('#gravar').jAlert('<b>Preencha todos os campos para gravar</b>', "warning", 'warningboxid');
 		}
         jQuery('.aplicar').click(function(){
-        	var rowMeta 		= parseInt(jQuery('.tMeta').html());
-        	var rowTolerancia	= parseInt(jQuery('.tTolerancia').html());
-        	var rowAviso 		= parseInt(jQuery('.tAviso').html());
-        	var rowRealizado	= parseInt(jQuery('.tRealizado').html());
-        	max = airspeedMax(meta);
-        	toleranceBand(meta, tolerancia);
-        	warningBand(meta, aviso);
+        	var idRow = jQuery(this).attr('id');
+        	var rowDataIni 		= 		   jQuery('.tDataIni-'   +idRow).html();
+        	var rowDataFim 		= 		   jQuery('.tDataFim-'	 +idRow).html();
+        	var rowNome 		= 		   jQuery('.tNome-' 	 +idRow).html();
+			var rowMedida 		= 		   jQuery('.tMedida-' 	 +idRow).html();
+        	var rowMeta 		= parseInt(jQuery('.tMeta-'		 +idRow).html());
+        	var rowTolerancia	= parseInt(jQuery('.tTolerancia-'+idRow).html());
+        	var rowAviso 		= parseInt(jQuery('.tAviso-'	 +idRow).html());
+        	var rowRealizado	= parseInt(jQuery('.tRealizado-' +idRow).html());
+        	airspeedMax(rowMeta);
+        	toleranceBand(rowMeta, rowTolerancia);
+        	warningBand(rowMeta, rowAviso);
+        	fillsInput(rowDataIni, rowDataFim, rowNome, rowMedida, rowMeta, rowTolerancia, rowAviso, rowRealizado);
         	changeGauge(rowRealizado, tolerance[0], tolerance[1], warning[0], warning[1], max);
         });
     });
@@ -96,4 +103,14 @@ function cleanInputs(){
 	jQuery('.field input, select').each(function(){
 		jQuery(this).val('');
     }); 
+}
+function fillsInput(dataIni, dataFim, nome, medida, meta, tolerancia, aviso, realizado){
+	jQuery('#periodo1').attr('value', dataIni);
+	jQuery('#periodo2').attr('value', dataFim);
+	jQuery('#nome').attr('value', nome);
+	jQuery('#medida').attr('value', medida);
+	jQuery('#meta').attr('value', meta);
+	jQuery('#tolerancia').attr('value', tolerancia);
+	jQuery('#aviso').attr('value', aviso);
+	jQuery('#realizado').attr('value', realizado);
 }
