@@ -7,7 +7,11 @@ jQuery(document).ready(function() {
 	jQuery("#periodo1").datepicker();
 	jQuery("#periodo2").datepicker();
 
-    jQuery('#meta').blur(function(){
+    jQuery('#nome').keyup(function(){
+		jQuery('#title').html(jQuery(this).val());
+	});
+
+	jQuery('#meta').blur(function(){
     	meta = parseInt(jQuery('#meta').val());
     });
     
@@ -64,7 +68,7 @@ jQuery(document).ready(function() {
 	    		"</tr>"
 	    	);
 			count++;
-			cleanInputs();
+			//cleanInputs();
     	}else{
 			jQuery('#gravar').jAlert('<b>Preencha todos os campos para gravar</b>', "warning", 'warningboxid');
 		}
@@ -100,11 +104,13 @@ function airspeedMax(meta){
 	max = meta * 2;
 }
 function cleanInputs(){
+	jQuery('#title').html('');
 	jQuery('.field input, select').each(function(){
 		jQuery(this).val('');
     }); 
 }
 function fillsInput(dataIni, dataFim, nome, medida, meta, tolerancia, aviso, realizado){
+	jQuery('#title').html(nome);
 	jQuery('#periodo1').attr('value', dataIni);
 	jQuery('#periodo2').attr('value', dataFim);
 	jQuery('#nome').attr('value', nome);
