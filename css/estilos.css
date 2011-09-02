@@ -118,3 +118,13 @@ table tr .name{
 .aplicar {
 	cursor: pointer;
 }
+#title{
+	margin-top: -43px;
+	width: 201px;
+	margin-left: 155px;
+	float: left;
+	font-family: Arial, Verdana;
+	text-shadow: 2px 2px 2px #CCC;
+	font-size: 22px;
+	font-weight: bold;
+}
