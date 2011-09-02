@@ -30,7 +30,7 @@ label {
     font-size: 15px;
 }
 
-.input{
+.input, select{
     font-family: Arial, Verdana;
     font-size: 15px;
     padding: 5px;
@@ -98,6 +98,7 @@ label {
 }
 #grid{
 	margin-left: 16%;
+	margin-top: -28px;
 }
 #legend{
 	background: none repeat scroll 0 0 #F0F0F0;
