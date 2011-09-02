@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
     	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-        <title>
-        	Indicador de meta
-        </title>
+        <title>Decisão Online 1.0</title>
         <link href="css/estilos.css" type="text/css" rel="stylesheet"/>
         <link href="js/jquery-ui/css/ui-lightness/jquery-ui-1.8.16.custom.css" type="text/css" rel="stylesheet"/>
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -21,18 +19,29 @@
     <body>
 	    <div id="nav">
 	         <form id = "formIndicador">
-	            <h3>Indicador de Qualidade</h3>
-	            
+	            <h3>Decisão Online</h3>
 	            <div class="field">
 	                <label for="periodo">Período:</label>
 	                <input type="text" class="input" name="periodo1" id="periodo1" /> -
 	                <input type="text" class="input" name="periodo2" id="periodo2" />
-	                <!--<p class="hint">Insira o período</p>-->
 	            </div>
 	            
 	            <div class="field">
 	                <label for="nome">Nome:</label>
 	                <input type="text" class="input" name="nome" id="nome" />
+	            </div>
+
+				<div class="field">
+	                <label for="medida">Tipo de Medida:</label>
+	                <select id="medida" name="medida">
+						<option value="">Selecione</option>
+						<optgroup label="Tipos de Medidas">
+							<option value="un">Un(Unitario)</option>
+							<option value="tl">Toneladas</option>
+							<option value="kg">Kilos</option>
+							<option value="mg">Gramas</option>
+						</optgroup>
+					</select>
 	            </div>
 	
 	            <div class="field">
@@ -54,9 +63,8 @@
 	                <label for="realizacao">Realização:</label>
 	                <input type="text" class="input" name="realizado" id="realizado" />
 	            </div>
-	
-	            <input type= "button" name= "gravar" id= "gravar" value="Gravar" class="button"/>
-	            <input type= "button" name= "limpar" id= "limpar" value="Limpar" class="button"/>
+					<input type= "button" name= "gravar" id= "gravar" value="Gravar" class="button"/>
+					<input type= "button" name= "limpar" id= "limpar" value="Limpar" class="button"/>
 	        </form>
 	        <div id="gauge"></div>
 	        <table id="grid">
@@ -70,7 +78,8 @@
 		        	<th>Realização</th>
 		        	<th>Aplicar</th>
 	        	</tr>
-	        	<tbody class="indicadores"></tbody>
+	        	<tbody class="indicadores">
+	        	</tbody>
 			</table>
 	     </div>
     </body>
