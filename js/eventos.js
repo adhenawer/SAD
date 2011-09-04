@@ -68,7 +68,7 @@ jQuery(document).ready(function() {
 	    		"</tr>"
 	    	);
 			count++;
-			//cleanInputs();
+			cleanInputs();
     	}else{
 			jQuery('#gravar').jAlert('<b>Preencha todos os campos para gravar</b>', "warning", 'warningboxid');
 		}
