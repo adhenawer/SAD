@@ -51,7 +51,7 @@ jQuery(document).ready(function() {
     	var data = jQuery('#data').val();
     	var nome	= jQuery('#nome').val();
 		var medida = jQuery('#medida optgroup option:selected').html();
-    	if(dataIni && dataFim && nome && realizado && tolerance && warning && medida && aviso){
+    	if(data && nome && realizado && tolerance && warning && medida && aviso){
 	    	jQuery('#grid .indicadores').append( 
 	    		"<tr>" + 
 					"<td class='tData-"	     +count+"'>"	+ data   	 +	"</td>"+
