@@ -4,8 +4,7 @@ jQuery(document).ready(function() {
 	jQuery('#tolerancia').numeric();
 	jQuery('#aviso').numeric();
 	jQuery('#realizado').numeric();
-	jQuery("#periodo1").datepicker();
-	jQuery("#periodo2").datepicker();
+	jQuery("#data").datepicker({ dateFormat: 'mm-yy' });
 
     jQuery('#nome').keyup(function(){
 		jQuery('#title').html(jQuery(this).val());
@@ -49,15 +48,13 @@ jQuery(document).ready(function() {
     });
     
     jQuery('#gravar').click(function(){
-    	var dataIni = jQuery('#periodo1').val();
-    	var dataFim = jQuery('#periodo2').val();
+    	var data = jQuery('#data').val();
     	var nome	= jQuery('#nome').val();
 		var medida = jQuery('#medida optgroup option:selected').html();
     	if(dataIni && dataFim && nome && realizado && tolerance && warning && medida && aviso){
 	    	jQuery('#grid .indicadores').append( 
 	    		"<tr>" + 
-					"<td class='tDataIni-"	 +count+"'>"	+ dataIni 	 +	"</td>"+
-					"<td class='tDataFim-"	 +count+"'>"	+ dataFim 	 +	"</td>"+
+					"<td class='tData-"	     +count+"'>"	+ data   	 +	"</td>"+
 					"<td class='tNome-"		 +count+"'>"	+ nome    	 +	"</td>"+
 					"<td class='tMedida-"	 +count+"'>"	+ medida 	 +	"</td>"+
 					"<td class='tMeta-"	     +count+"'>"	+ meta 		 + 	"</td>"+
@@ -74,8 +71,7 @@ jQuery(document).ready(function() {
 		}
         jQuery('.aplicar').click(function(){
         	var idRow = jQuery(this).attr('id');
-        	var rowDataIni 		= 		   jQuery('.tDataIni-'   +idRow).html();
-        	var rowDataFim 		= 		   jQuery('.tDataFim-'	 +idRow).html();
+        	var rowData 		= 		   jQuery('.tData-'      +idRow).html();
         	var rowNome 		= 		   jQuery('.tNome-' 	 +idRow).html();
 			var rowMedida 		= 		   jQuery('.tMedida-' 	 +idRow).html();
         	var rowMeta 		= parseInt(jQuery('.tMeta-'		 +idRow).html());
@@ -85,7 +81,7 @@ jQuery(document).ready(function() {
         	airspeedMax(rowMeta);
         	toleranceBand(rowMeta, rowTolerancia);
         	warningBand(rowMeta, rowAviso);
-        	fillsInput(rowDataIni, rowDataFim, rowNome, rowMedida, rowMeta, rowTolerancia, rowAviso, rowRealizado);
+        	fillsInput(rowData, rowNome, rowMedida, rowMeta, rowTolerancia, rowAviso, rowRealizado);
         	changeGauge(rowRealizado, tolerance[0], tolerance[1], warning[0], warning[1], max);
         });
     });
@@ -109,10 +105,9 @@ function cleanInputs(){
 		jQuery(this).val('');
     }); 
 }
-function fillsInput(dataIni, dataFim, nome, medida, meta, tolerancia, aviso, realizado){
+function fillsInput(data, nome, medida, meta, tolerancia, aviso, realizado){
 	jQuery('#title').html(nome);
-	jQuery('#periodo1').attr('value', dataIni);
-	jQuery('#periodo2').attr('value', dataFim);
+	jQuery('#data').attr('value', data);
 	jQuery('#nome').attr('value', nome);
 	jQuery('#medida').attr('value', medida);
 	jQuery('#meta').attr('value', meta);
